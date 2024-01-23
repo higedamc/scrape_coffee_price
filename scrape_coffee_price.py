@@ -37,3 +37,12 @@ with open("index.html", "r+") as file:
     file.seek(0)
     file.write(new_content)
     file.truncate()
+
+# settings.yamlファイルを更新
+with open("../.nostr/settings.yaml", "r+") as file:
+    mili_sats = price_in_sats * 1000
+    read_yaml = file.read()
+    yaml_content = re.sub(r"amount: (\d+)", f"amount: {mili_sats:.0f}", read_yaml)
+    file.seek(0)
+    file.write(yaml_content)
+    file.truncate()
